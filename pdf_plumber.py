@@ -15,15 +15,14 @@ def extract_table_from_pdf(pdf_file):
         else:
             return None
 
-def main():
-    st.title("PDF to Excel Converter")
-    st.subheader('With using PdfPlumber to extract tables out of the uploaded PDF')
-    uploaded_file = st.file_uploader("Upload PDF", type="pdf")
+st.title("PDF to Excel Converter")
+st.subheader('With using PdfPlumber to extract tables out of the uploaded PDF')
+uploaded_file = st.file_uploader("Upload PDF", type="pdf")
 
-    if uploaded_file is not None:
-        st.write("### Extracted Table from PDF")
-        table = extract_table_from_pdf(uploaded_file)
-        if table is not None:
+if uploaded_file is not None:
+    st.write("### Extracted Table from PDF")
+    table = extract_table_from_pdf(uploaded_file)
+    if table is not None:
             df = pd.DataFrame(table)
             st.write(df)
 
@@ -38,10 +37,9 @@ def main():
                 file_name="extracted_table.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
-        else:
-            st.write("No table found in the PDF.")
     else:
+            st.write("No table found in the PDF.")
+else:
         st.write("Please upload a PDF file.")
 
-if __name__ == "__main__":
-    main()
+
